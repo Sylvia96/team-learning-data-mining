@@ -82,3 +82,21 @@ train.csv
 本次比赛主要采用AUC（Area Under Curve）作为评价指标。指ROC曲线下于坐标轴围成的面积。
 
 ROC（Receiver Operating Characteristic）空间将假正例率（FPR）定义为 X 轴，真正例率（TPR）定义为 Y 轴。
+
+* TPR：在所有实际为正例的样本中，被正确地判断为正例之比率。 $$TPR = \frac{TP}{TP + FN}$$ 
+
+* FPR：在所有实际为负例的样本中，被错误地判断为正例之比率。 $$FPR = \frac{FP}{FP + TN}$$
+
+其中，
+
+若一个实例是正类，并且被预测为正类，即为真正类TP(True Positive)
+
+若一个实例是正类，但是被预测为负类，即为假负类FN(False Negative)
+
+若一个实例是负类，但是被预测为正类，即为假正类FP(False Positive)
+
+若一个实例是负类，并且被预测为负类，即为真负类TN(True Negative)
+
+AUC(Area Under Curve) AUC（Area Under Curve）被定义为 ROC曲线 下与坐标轴围成的面积，显然这个面积的数值不会大于1。又由于ROC曲线一般都处于y=x这条直线的上方，所以AUC的取值范围在0.5和1之间。AUC越接近1.0，检测方法真实性越高;等于0.5时，则真实性最低，无应用价值。
+
+
