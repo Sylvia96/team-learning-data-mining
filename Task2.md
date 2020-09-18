@@ -64,7 +64,7 @@ data_train = pd.read_csv('/content/train.csv')
 data_test_a = pd.read_csv('/content/testA.csv')
 
 # 部分读取
-data_train_sample = pd.read_csv('/content/train.csv', nrows=5)
+data_train_sample = pd.read_csv('/content/train.csv',nrows=5)
 
 # 分块读取
 chunker = pd.read_csv("./train.csv",chunksize=5)
