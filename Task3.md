@@ -92,3 +92,59 @@ data_train.isnull().sum()
 category_fea
 ```
 
+* 时间格式
+
+```python
+#转化成时间格式
+for data in [data_train, data_test_a]:
+    data['issueDate'] = pd.to_datetime(data['issueDate'],format='%Y-%m-%d')
+    startdate = datetime.datetime.strptime('2007-06-01', '%Y-%m-%d')
+    #构造时间特征
+    data['issueDateDT'] = data['issueDate'].apply(lambda x: x-startdate).dt.days
+```
+
+
+```python
+data_train['employmentLength'].value_counts(dropna=False).sort_index()
+```
+
+* 对象类型特征转换到数值
+
+```python
+def employmentLength_to_int(s):
+    if pd.isnull(s):
+        return s
+    else:
+        return np.int8(s.split()[0])
+for data in [data_train, data_test_a]:
+    data['employmentLength'].replace(to_replace='10+ years', value='10 years', inplace=True)
+    data['employmentLength'].replace('< 1 year', '0 years', inplace=True)
+    data['employmentLength'] = data['employmentLength'].apply(employmentLength_to_int)
+```
+
+
+```python
+data['employmentLength'].value_counts(dropna=False).sort_index()
+```
+
+* 类别特征
+
+
+```python
+# 部分类别特征
+cate_features = ['grade', 'subGrade', 'employmentTitle', 'homeOwnership', 'verificationStatus', 'purpose', 'postCode', 'regionCode', \
+                 'applicationType', 'initialListStatus', 'title', 'policyCode']
+for f in cate_features:
+    print(f, '类型数：', data[f].nunique())
+```
+
+* 异常值处理
+  * 检测异常的方法一：均方差
+  * 检测异常的方法二：箱型图
+
+
+
+
+To be continued...
+
+Reference link: https://github.com/datawhalechina/team-learning-data-mining/blob/master/FinancialRiskControl/Task3%20%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B.md
